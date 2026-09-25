@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <CheckBox
+        android:id="@+id/cbShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="允许局域网传输（同一 WiFi 下互相发现）"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tvSelf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text=""
+        android:textSize="12sp"
+        android:textColor="#666666" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="扫描设备"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvScan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="10dp"
+            android:text="未扫描"
+            android:textSize="12sp"
+            android:textColor="#666666" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="附近的设备"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvPeers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="对方的文件（点一下拉过来）"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvRemote"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="我的文件（长按发送）"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvLocal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:id="@+id/tvLanMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text=""
+        android:textSize="12sp"
+        android:textColor="#666666" />
+
+</LinearLayout>
