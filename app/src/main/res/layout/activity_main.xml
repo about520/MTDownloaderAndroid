@@ -50,6 +50,15 @@
             android:textSize="13sp" />
 
         <Button
+            android:id="@+id/tabMusic"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="音乐"
+            android:textSize="13sp" />
+
+        <Button
             android:id="@+id/tabFiles"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
