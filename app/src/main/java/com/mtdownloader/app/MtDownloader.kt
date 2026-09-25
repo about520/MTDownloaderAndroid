@@ -41,7 +41,7 @@ class MtDownloader(private val dir: File) {
         paused = false
     }
 
-    fun start(urlStr: String, threads: Int, cb: Callback) {
+    fun start(urlStr: String, threads: Int, cb: Callback, preferredName: String? = null) {
         if (running) {
             cb.onError("已经有任务在跑了")
             return
@@ -53,7 +53,7 @@ class MtDownloader(private val dir: File) {
 
         Thread {
             try {
-                val name = guessName(urlStr)
+                val name = preferredName?.takeIf { it.isNotBlank() } ?: guessName(urlStr)
                 val out = File(dir, safeName(name))
                 val prog = File(dir, safeName(name) + ".mtprog")
 
