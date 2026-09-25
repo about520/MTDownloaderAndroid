@@ -1,0 +1,45 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 编译 APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: 准备 Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.5'
+
+      - name: 接受 Android SDK 许可
+        run: |
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          echo "ANDROID_HOME=$ANDROID_HOME"
+
+      - name: 编译 Debug APK
+        run: gradle assembleDebug --stacktrace
+
+      - name: 查看产物
+        run: |
+          find app/build/outputs -name "*.apk" -type f | while read f; do ls -lh "$f"; done
+
+      - name: 上传 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MTDownloader-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
