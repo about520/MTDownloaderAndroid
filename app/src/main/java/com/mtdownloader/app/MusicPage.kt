@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
@@ -208,21 +209,22 @@ class MusicPage(private val act: MainActivity, private val v: View) : Page {
         tip.setPadding(0, 16, 0, 0)
         box.addView(tip)
 
-        AlertDialog.Builder(act)
+        val dlg = AlertDialog.Builder(act)
             .setTitle("会员 Cookie")
             .setView(box)
-            .setPositiveButton("保存并校验") { _, _ ->
-                val ck = et.text.toString().trim()
-                act.getSharedPreferences("mt", Context.MODE_PRIVATE)
-                    .edit().putString("netease_cookie", ck).apply()
-                setStatus("校验中…")
-                Thread {
-                    val s = NeteaseApi.checkLogin(ck)
-                    act.runOnUiThread { setStatus(s) }
-                }.start()
-            }
-            .setNegativeButton("取消", null)
-            .show()
+            .create()
+        dlg.setButton(AlertDialog.BUTTON_POSITIVE, "保存并校验") { _, _ ->
+            val ck = et.text.toString().trim()
+            act.getSharedPreferences("mt", Context.MODE_PRIVATE)
+                .edit().putString("netease_cookie", ck).apply()
+            setStatus("校验中…")
+            Thread {
+                val s = NeteaseApi.checkLogin(ck)
+                act.runOnUiThread { setStatus(s) }
+            }.start()
+        }
+        dlg.setButton(AlertDialog.BUTTON_NEGATIVE, "取消") { _, _ -> }
+        dlg.show()
     }
 
     private fun setStatus(s: String) { tvStatus.text = s }
@@ -261,11 +263,11 @@ class MusicPage(private val act: MainActivity, private val v: View) : Page {
             }
             return view
         }
+    }
 
-        private class VH(view: View) {
-            val tvName: TextView = view.findViewById(R.id.tvSongName)
-            val tvSub: TextView = view.findViewById(R.id.tvSongSub)
-            val btnDl: Button = view.findViewById(R.id.btnDl)
-        }
+    private class VH(view: View) {
+        val tvName: TextView = view.findViewById(R.id.tvSongName)
+        val tvSub: TextView = view.findViewById(R.id.tvSongSub)
+        val btnDl: Button = view.findViewById(R.id.btnDl)
     }
 }
