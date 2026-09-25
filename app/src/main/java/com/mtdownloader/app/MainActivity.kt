@@ -37,16 +37,17 @@ class MainActivity : AppCompatActivity() {
         val downloadPage = DownloadPage(this, inf.inflate(R.layout.page_download, content, false))
         val browserPage = BrowserPage(this, inf.inflate(R.layout.page_browser, content, false))
         val lan = LanPage(this, inf.inflate(R.layout.page_lan, content, false))
+        val musicPage = MusicPage(this, inf.inflate(R.layout.page_music, content, false))
         val filesPage = FilesPage(this, inf.inflate(R.layout.page_files, content, false))
         lanPage = lan
 
-        pages = listOf(downloadPage, browserPage, lan, filesPage)
+        pages = listOf(downloadPage, browserPage, lan, musicPage, filesPage)
         for (p in pages) {
             content.addView(p.view())
             p.view().visibility = View.GONE
         }
 
-        val tabs = listOf(R.id.tabDownload, R.id.tabBrowser, R.id.tabLan, R.id.tabFiles)
+        val tabs = listOf(R.id.tabDownload, R.id.tabBrowser, R.id.tabLan, R.id.tabMusic, R.id.tabFiles)
         for ((i, id) in tabs.withIndex()) {
             findViewById<Button>(id).setOnClickListener { switchTo(i) }
         }
